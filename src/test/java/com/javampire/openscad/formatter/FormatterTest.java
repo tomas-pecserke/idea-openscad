@@ -5,8 +5,9 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.command.CommandProcessor;
 import com.intellij.psi.codeStyle.CodeStyleManager;
 import com.intellij.testFramework.fixtures.LightJavaCodeInsightFixtureTestCase;
-import com.intellij.util.containers.ContainerUtil;
 import org.junit.Test;
+
+import java.util.List;
 
 public class FormatterTest extends LightJavaCodeInsightFixtureTestCase {
 
@@ -22,7 +23,7 @@ public class FormatterTest extends LightJavaCodeInsightFixtureTestCase {
                 CommandProcessor.getInstance().runUndoTransparentAction(() ->
                         CodeStyleManager.getInstance(getProject()).reformatText(
                                 myFixture.getFile(),
-                                ContainerUtil.newArrayList(myFixture.getFile().getTextRange())
+                                List.of(myFixture.getFile().getTextRange())
                         )
                 )
         );
@@ -37,7 +38,7 @@ public class FormatterTest extends LightJavaCodeInsightFixtureTestCase {
                     CodeStyle.getCustomSettings(myFixture.getFile(), OpenSCADCodeStyleSettings.class).INDENT_CASCADING_TRANSFORMATIONS = false;
                     CodeStyleManager.getInstance(myFixture.getProject()).reformatText(
                             myFixture.getFile(),
-                            ContainerUtil.newArrayList(myFixture.getFile().getTextRange())
+                            List.of(myFixture.getFile().getTextRange())
                     );
                 })
         );

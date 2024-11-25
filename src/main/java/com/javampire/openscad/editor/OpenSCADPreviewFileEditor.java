@@ -51,8 +51,9 @@ public class OpenSCADPreviewFileEditor extends UserDataHolderBase implements Fil
     private ActionToolbar previewToolbar;
     private final Alarm mySwingAlarm = new Alarm(Alarm.ThreadToUse.SWING_THREAD, this);
 
-    private OpenSCADPreviewFileEditorConfiguration editorConfig = new OpenSCADPreviewFileEditorConfiguration(this);
+    private final OpenSCADPreviewFileEditorConfiguration editorConfig = new OpenSCADPreviewFileEditorConfiguration(this);
 
+    @Nullable
     public JCEFHtmlPanel getHtmlPanel() {
         return htmlPanel;
     }
@@ -221,11 +222,6 @@ public class OpenSCADPreviewFileEditor extends UserDataHolderBase implements Fil
 
     @Override
     public void removePropertyChangeListener(@NotNull PropertyChangeListener listener) {
-    }
-
-    @Override
-    public @Nullable FileEditorLocation getCurrentLocation() {
-        return null;
     }
 
     @Override

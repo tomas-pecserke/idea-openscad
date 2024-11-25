@@ -60,30 +60,27 @@ public class ToggleAutoRefreshAction extends OpenSCADAction {
         vfSaveListener = null;
     }
 
-    private class AutoRefreshListener implements VirtualFileListener {
-        private final Project project;
-        private final VirtualFile scadFile;
+    private record AutoRefreshListener(Project project, VirtualFile scadFile) implements VirtualFileListener {
+            private AutoRefreshListener(final @NotNull Project project, final @NotNull VirtualFile scadFile) {
+                this.project = project;
+                this.scadFile = scadFile;
+            }
 
-        public AutoRefreshListener(final @NotNull Project project, final @NotNull VirtualFile scadFile) {
-            this.project = project;
-            this.scadFile = scadFile;
-        }
-
-        @Override
-        public void contentsChanged(final @NotNull VirtualFileEvent event) {
-            if (event.isFromSave() && scadFile.equals(event.getFile())) {
-                ActionUtil.performActionDumbAwareWithCallbacks(
-                        new RefreshPreviewAction(),
-                        AnActionEvent.createFromDataContext(
-                                ActionPlaces.UNKNOWN,
-                                new Presentation(RefreshPreviewAction.TEXT),
-                                SimpleDataContext.builder()
-                                        .add(CommonDataKeys.PROJECT, project)
-                                        .add(CommonDataKeys.VIRTUAL_FILE, scadFile)
-                                        .build()
-                        )
-                );
+            @Override
+            public void contentsChanged(final @NotNull VirtualFileEvent event) {
+                if (event.isFromSave() && scadFile.equals(event.getFile())) {
+                    ActionUtil.performActionDumbAwareWithCallbacks(
+                            new RefreshPreviewAction(),
+                            AnActionEvent.createFromDataContext(
+                                    ActionPlaces.UNKNOWN,
+                                    new Presentation(RefreshPreviewAction.TEXT),
+                                    SimpleDataContext.builder()
+                                            .add(CommonDataKeys.PROJECT, project)
+                                            .add(CommonDataKeys.VIRTUAL_FILE, scadFile)
+                                            .build()
+                            )
+                    );
+                }
             }
         }
-    }
 }

@@ -31,6 +31,8 @@ import com.intellij.psi.search.FilenameIndex;
 import com.intellij.util.CommonProcessors;
 import com.javampire.openscad.OpenSCADFileType;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -39,6 +41,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class OpenSCADSettingsStartupActivity implements StartupActivity {
+
+    private static final Logger log = LoggerFactory.getLogger(OpenSCADSettingsStartupActivity.class);
 
     private final static String DO_NOT_ASK_AGAIN_ALLOW_PREVIEW_ID = "Notification.DoNotAsk-OpenSCAD-allow_preview";
 
@@ -219,7 +223,7 @@ public class OpenSCADSettingsStartupActivity implements StartupActivity {
                         break;
                     }
                 } catch (final ExecutionException e) {
-                    e.printStackTrace();
+                    log.error("Could not find OpenSCAD executable", e);
                 }
             }
             if (executablePath != null && executablePath.isEmpty()) {

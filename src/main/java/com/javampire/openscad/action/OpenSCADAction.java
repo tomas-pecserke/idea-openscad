@@ -50,4 +50,9 @@ public abstract class OpenSCADAction extends AnAction {
         }
         return null;
     }
+
+    @Override
+    public @NotNull ActionUpdateThread getActionUpdateThread() {
+        return ActionUpdateThread.BGT;
+    }
 }

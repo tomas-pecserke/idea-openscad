@@ -26,7 +26,7 @@ public class OpenSCADFoldingBuilder extends FoldingBuilderEx {
     public FoldingDescriptor[] buildFoldRegions(@NotNull PsiElement root, @NotNull Document document, boolean quick) {
         List<FoldingDescriptor> descriptors = new ArrayList<>();
         addFoldsForElement(descriptors, root, document, quick);
-        return descriptors.toArray(new FoldingDescriptor[descriptors.size()]);
+        return descriptors.toArray(new FoldingDescriptor[0]);
     }
 
     @Nullable
