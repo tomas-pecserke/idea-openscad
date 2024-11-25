@@ -190,9 +190,9 @@ const camera = new THREE.PerspectiveCamera(
 camera.name = NAME_CAMERA;
 
 // Create lights
-const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+const ambientLight = new THREE.AmbientLight(0xffffff, .25);
 scene.add(ambientLight);
-const pointLight = new THREE.PointLight(0xffffff, 1500, 0, 2);
+const pointLight = new THREE.PointLight(0xffffff, 15, 0, 5);
 camera.add(pointLight);
 scene.add(camera);
 
@@ -206,12 +206,7 @@ const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 
 // Create material
-const material = new THREE.MeshStandardMaterial({
-  color: 0x000000,
-  metalness: 0,
-  roughness: 0.2,
-  flatShading: true,
-});
+const material = new THREE.MeshStandardMaterial({flatShading: true});
 
 // Load STL
 const loader = new STLLoader();
